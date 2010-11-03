@@ -1,0 +1,43 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.*[^/])$ http://%{HTTP_HOST}%{REQUEST_URI}/ [R=301,L] 
+
+    RewriteCond $1 !^$
+    RewriteCond $1 !^(index\.php|public|docs)
+    RewriteRule ^(.*)$ index.php?$1 [QSA,L]
+</IfModule>
+
+# compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+# Or, compress certain file types by extension:
+<Files *.html>
+    SetOutputFilter DEFLATE
+</Files>
+
+<FilesMatch "\.(ico|pdf|flv)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+
+<FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+
+<FilesMatch "\.(xsl|txt|css|js)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+
+<FilesMatch "\.(html|htm|xml|php)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+
+# Options -Indexes

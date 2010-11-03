@@ -1,0 +1,9 @@
+PHP CENTRAL: PHP Framework
+Author: Gian Carlo Val Ebao (gianebao@gmail.com)
+Requirement: PHP 5.3 and above
+
+The goal is to minimizes repetitive activities like, connecting and querying a database, loading files and scripts, parsing data, setting up log files, and tries to implement coding standards and optimizations. 
+
+With the help of the MCV design pattern, file structures are now presented in an orderly manner. This also eases development or making modifications by modularizing each main component of the an application (Model, View and Controller).
+
+Navigating through the site is a lot more easier using Beautiful URLs. Not only that it gives a much more meaningful links, this also helps the system in determining which module to execute and is a key requirement in building services using REST. 

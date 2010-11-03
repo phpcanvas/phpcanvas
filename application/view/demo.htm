@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="content-Type" content="text/html; charset=UTF-8"/>
+    <title>PHPCanvas: Demo Test</title>
+    <meta name="author" content="author"/>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>PHPCanvas: Demo Test</h1>
+        <ol>
+            <li><span>PHP Version</span>:<a href="#phpversion"><?php echo $phpversion ?></a></li>
+            <li><span>Integration type of system framework</span>:<a href="#integration-<?php echo $integration ?>"><?php echo $integration ?></a></li>
+            <li class="<?php echo $rewrite ?>"><span>Check Apache <em>mod_rewrite</em></span>:<a href="#rewrite-<?php echo $rewrite ?>"><?php echo ucfirst($rewrite) ?></a></li>
+            <li class="<?php echo $fallback ?>"><span>Load fallback functions</span>:<a href="#fallback-<?php echo $fallback ?>"><?php echo ucfirst($fallback) ?></a></li>
+            <li class="<?php echo $tempfolder ?>"><span>Access temporary folder</span>:<a href="#temp-<?php echo $tempfolder ?>"><?php echo ucfirst($tempfolder) ?></a></li>
+            <li class="<?php echo $db ?>"><span>Check database connection <strong>[MySQL]</strong></span>:<a href="#db-<?php echo $db ?>"><?php echo ucfirst($db) ?> - connection: <em><?php echo $dbname ?></em></a></li>
+            <li class="<?php echo $siteurl ?>"><span>Check site_url</span>:<a href="#siteurl-<?php echo $siteurl ?>"><?php echo ucfirst($siteurl) ?></a></li>
+        </ol>
+    </div>
+</body>
+</html>

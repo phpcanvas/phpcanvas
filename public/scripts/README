@@ -1,0 +1,1 @@
+/** Client-side scripts goes here. **/

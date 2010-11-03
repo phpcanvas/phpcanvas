@@ -1,0 +1,155 @@
+DEVELOPMENT GUIDLINES
+ver 1.1
+
+The following rules must be followed in developing this software to preserve 
+the original objective and purpose.
+
+I. Objective:
+To create a base object-oriented abstraction for developing web applications in 
+PHP (PHP:Hypertext Preprocessor). The (framework) must be fast, efficient, 
+light*, easy to deploy/package, maintainable, extendable and have minimal
+coupling.
+
+*Requires less resources(codes, files, memory, cpu..) to execute.
+
+II. Guidelines:
+
+1) Centralized Base Design and Portability
+The (framework) contains a base component (system) which can be linked to
+multiple applications. The (framework) can also be portable where in the system
+component can be contained together with an application.
+
+2) Naming Convention
+
+a) Files, Extensions and Folders
+    i) File names are in lower-cased alphabets, numbers and underscore "_" only.
+    
+    ii) The first character of a file name is a lower-cased alphabet followed by
+    any of the allowed characters and ends with a lower-cased alphabet or a
+    number.
+    
+    iii) File names describes the purpose of the script it contains.
+    
+    iv) File names are one (1) to three (3) words long. Words are separated by
+    an underscore "_".
+    
+    v) Files which belong to a group (module) are be suffixed with the an
+    underscore "_" then the group name.
+    
+    vi) Folder names are in lower-cased alphabets, numbers and underscore "_"
+    only.
+    
+    vii) The first character of a technical* folder name is a lower-cased 
+    alphabet followed by any of the allowed characters and ends with a 
+    lower-cased alphabet or a number. Non-technical** folder names are prepended
+    with an underscrore at the beginning.
+    
+    viii) Technical folder names must be one (1) word long.
+    
+    ix) File names describes the purpose of the files it contains.
+    
+    x) All technical files have extensions. Non-technical files in plain text
+    have no extensions.
+    htm = HTML documents
+    php = technical scripts
+    ini = configurations
+    
+    xi) Apache configurations are files that begin with a dot ".".
+
+*Any file, component or folder that is required or can be run by the software.
+**Any file or folder which has no effect on the software's execution. This are
+commonly backups or documentations.
+
+b) Variables, Functions, Methods and Classes
+    i) Variable names starts with a lower-cased alphabet followed by
+    alpha-numeric characters.
+    
+    ii) Variables are one (1) to three (3) words long. Words are in camel-case.
+    
+    iii) Variables describes their purpose in the script.
+    
+    iv) Incrementors or decrementors are labeled [i, j, k, l, m, n].
+    
+    v) Lengths or counts are labeled or suffixed with [count, length];
+    
+    vi) Function and method names starts with a lower-cased alphabet followed by
+    alpha-numeric characters.
+    
+    vii) Functions and methods are one (1) to three (3) words long. Words are in
+    camel-case.
+    
+    viii) Functions and methods describes their purpose in the script.
+    
+    ix) Class names starts with a upper-cased alphabet followed by alpha-numeric
+    characters.
+    
+    x) Classes are one (1) to three (3) words long. Words are in camel-case.
+    
+    xi) Classes describes their purpose or role in the system.
+    
+    xii) Classes are named after their file name making the character after the
+    underscore "_" upper-cased then removing all underscores.
+    File: my_class.php
+    class: class MyClass {}
+    
+    xiii) Only one (1) class should exist in one file. [Class file]
+    
+3) Coding Convetion
+This software is written mostly in PHP which is a C-based scripting language.
+There are a lot of other C-based languages one of them is javascript. Douglas
+Crockford <www.crockford.com> developed a coding convention and error checker
+called JSLint <www.jslint.com>. Since PHP also uses Lint as an error checker,
+this software adopt all posible rules imposed by JSLint.
+
+    i) Spaces after keywords.
+    
+    ii) Spaces after variable names and constants.
+    
+    iii) Spaces after assignment, boolean (operators except the not (!)
+    operator), arythmetic and bitwise operator.
+    
+    iv) Spaces after every scope quantifier (parenthesis and braces).
+    
+    v) Spaces are after the ternary (?) operator.
+    
+    vi) Spaces after the colon or comma character and no spaces before them.
+    
+    vii) Functions and Methods have no spaces between them and the following
+    open parenthesis on declaration or calling.
+    
+    viii) No spaces after open quantifiers (open parenthesis and open braces).
+    
+    ix) No spaces before close quantifiers (close parenthesis and close braces).
+
+    x) No spaces at the end of the line.
+
+    xi) Prioritize no space rules before space rules.
+    
+    xii) Line breaks after colon, semi-colon, comma, open parenthesis, close
+    parenthesis, open braces, assignment, boolean (except the not (!) operator),
+    arythmetic, bitwise and ternary operator.
+    
+    xiii) Line break on every logic.
+    
+    xix) No multiple successive line breaks.
+    
+    xx) All keywords are in lower-case.
+    
+    xxi) SQL statements are in upper-case(if posible).
+
+    xxii) Constants are on the left-side of a boolean.
+    
+    xxiii) Parethesis even for one (1) line scope.
+    
+    xxiv) Closing PHP tag (?>) is not required in class files.
+    
+4)Comments
+This software needs to be constantly documented. Adding comments in complicated
+logics and in every function, method and class will help in understanding old
+codes.
+
+    i) Inline comments only inside a scope.
+    
+    ii) Block comments before a function, method or class.
+    
+    iii) PHPdocs format in documenting functions, methods and classes.

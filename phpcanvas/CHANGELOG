@@ -1,0 +1,74 @@
+2010-10-2626262626262626262626262626262626262626262626262626 Version 0.3.1
+    - Enhanced PHPDocumentation
+    - OracleDatabase::execute; $opts default is OCI_COMMIT_ON_SUCCESS
+    - Deprecated: AbstractDatabase::closeConnection; use inherited close()
+    - Localized App::$fileRule
+    - Deprecated: App:benchmark
+    - Simplified configuration files
+    - Added: App::fileExists
+    - fix Mysql and Oracle connect method
+    - added support to <= PHP 5.1
+
+2010-08-30 Version 0.3.0
+    - Changed file system structure and renamed files. 
+      <className>Module for classes and <class_name>_module for files. (paths still depends on configuration)
+    - Uses "set_include_path" to automatically find the file within the file system
+    - Uses class autoload for easier class instantiation. classes can be instantiated by,
+      $foo = new fooModel();
+    - Sized down all classes.
+    - Deprecated: App::sysRoot
+    - Deprecated: App::root
+    - Deprecated: App::standard
+    - Deprecated: Controller::initializeModel
+    - Deprecated: Controller::loadModel
+    - Deprecated: Controller::setStatVal
+    - Deprecated: Controller::getStatVal
+    - Deprecated: Controller::setStat
+    - Deprecated: Controller::getStat
+    - Deprecated: Controller::addLog
+    - Deprecated: MysqlDatabase::bind
+    - Deprecated: RestRoute::loadController
+    - Added: App::PHPversion
+    - Added: Database::getStatement
+    - Added: MysqlDatabase::escape
+    - Added: RestRoute::applyDefault
+    - Added Fallback library that handles unsupported but required functions.
+
+2010-07-05 Version 0.2.2
+    - Support to MySQL Database
+    - added encryption component using "Cryptastic" by Andrew Johnson. rel. 2009
+
+2010-06-30 Version 0.2.1
+    - Uses Dynamic controller. controller to be used depends on the URL or the routing rule.
+    - Uses the first URL param as the controller then the method 
+    - Added utilities library. (system/util.php)
+    - changed the method visibilities of the controller
+    - route "__default__" to "__DEFAULT__" and indicates the default controller instead of method
+    - Added route component using "Route" that handles REST URL and re-routing
+    - BUG: Handle if App::load failed to load file
+    - Deprecated: App::parseURL
+    - Deprecated: App::reRoute
+    
+2010-06-03 Version 0.2.0
+    - 39.2% faster than the previous version
+    - Applied Lint in all scripts and removed all “dirty” codes ex. eval, regexp ..
+    - Segregated system files from application files
+    - Standardized directory separators to Linux format
+    - Configuration files are in DOS-ini format
+    - Added URL rerouting rules
+    - Added error reporting handler that saves errors to log files when debug is deactivated
+    - App toClassName -> toMethodName
+    - More stable and consistent database response time
+    - Database class abstract
+    - Removed handling of previously failed connections
+    - Cache are subdivided by connections
+    - Caches have expiration dates and content types
+    - Added alwaysCache property in Core Model to force caching rule
+    - Added Model and Controller interface class
+    - View modules returns results instead of displaying.
+    - Renamed method from "show" to "build".
+    - Changed the Controller::$layout from file => format to format => array(file).
+    - Header declarations are in a different method of format class.
+
+2010-02-01 Version 0.1.0
+    - Initial Release
