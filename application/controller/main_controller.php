@@ -5,7 +5,7 @@ class MainController extends ControllerInterface{
     
     public function main() {
         $this->layout = 'demo';
-        $this->scriptTime = true;
+        $this->scriptTime = false;
         
         $phpver = phpversion();
         $sysDir = strtoupper(str_replace('\\', '/', App::$sysroot));
@@ -28,13 +28,14 @@ class MainController extends ControllerInterface{
         $fallback = function_exists('json_decode') && function_exists('json_encode') ? 
             (5 <= (int)$phpver && 2 <= (int)substr($phpver, 2) ? 'ignored': 'ok'): 'failed';
         
-        
+        $tmp = new File(App::conf('file.tmp'));
         if(touch(App::conf('file.tmp') . '/demo.txt')) {
             $tempFolder = 'ok';
             unlink(App::conf('file.tmp') . '/demo.txt');
         } else {
             $tempFolder = 'failed';
         }
+        
         $dbs = App::conf('database');
         if (empty($dbs)) {
             $db = 'empty';

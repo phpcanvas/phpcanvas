@@ -11,13 +11,15 @@ $ms = array_sum(explode(' ', microtime())); // setting the start time.
 /**
  * Contains all the utilities function for the application.
  */
-require 'system/util.php';
+require 'system/autoload.php';
 /**
  * The Master class.
  * Contains all system-related functions like, class monitoring,
  * program flow and standards maintenance.
  */
 require 'system/app.php';
+
+App::$id = $appId;
 
 // Contains all application-specific configurations.
 App::initialize('application/config.ini');

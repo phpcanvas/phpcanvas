@@ -18,6 +18,12 @@
  */
 class App {
     /**
+     * Application identifier.
+     * @access private
+     */
+    public static $id = '';
+    
+    /**
      * Contains all the loaded configurations.
      */
     public static $conf = array();
@@ -103,18 +109,6 @@ class App {
     }
     
     /**
-     * Initializes the route rules from a configuration file.
-     * @access private
-     * @param string $file configuration source.
-     * @static
-     */
-    public static function loadRouteRules($file) {
-        $route = array();
-        include $file;
-        self::$conf = array_merge(self::$conf, array('route' => $route));
-    }
-    
-    /**
      * Loads the configurations to the class.
      * Calling this multiple times will append/overwrite the previous configuration keys.
      * @param array|string $conf configuration source.
@@ -158,7 +152,6 @@ class App {
      */
     public static function startObjects() {
         self::$includePath = explode(PATH_SEPARATOR, ini_get('include_path'));
-        
         self::$log = new FileLog(self::$conf['file']['log'] . '/');
         self::$logFile = 'error_' . date('ymd');
     }

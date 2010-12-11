@@ -4,13 +4,70 @@
 
 <head>
     <meta http-equiv="content-Type" content="text/html; charset=UTF-8"/>
-    <title>PHPCanvas: Demo Test</title>
-    <meta name="author" content="author"/>
+    <title>PHPCanvas: Demo</title>
+    <meta name="author" content="Gian Carlo Val Ebao"/>
+    <style type="text/css">
+        body, h1, h2, h3, h4, h5, p, div, fieldset, form, ol, ul, li{
+            padding: 0;
+            margin: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            color: #333;
+        }
+        
+        body {
+            font-family: "Georgia";
+            font-size: 1em;
+            background-color: #FFE7B7;
+        }
+        
+        div.wrapper {
+            background-color: #FFF;
+            border: 1px solid #CCC;
+            width: 50em;
+            margin: auto .25em;
+            padding: 1em;
+        }
+        
+        ol {
+            list-style-position: inside;
+        }
+        
+        h1, h2, h3 {
+            margin-top: 1.5em;
+            margin-bottom: .25em;
+        }
+        
+        h1 {
+            margin-top: 0;
+            background-color: #223E7F;
+            border: .1em solid #6984C3;
+            color: #FFDE9C;
+            padding: .25em;
+        }
+        
+        h2 {
+            color: #606F92;
+        }
+        
+        h3 {
+            color: #A67C28;
+        }
+        
+        p a, li a {
+            color: #223E7F;
+        }
+        
+    </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <h1>PHPCanvas: Demo Test</h1>
+        <h1><em>PHPCanvas</em> Demo</h1>
+        
         <ol>
             <li><span>PHP Version</span>:<a href="#phpversion"><?php echo $phpversion ?></a></li>
             <li><span>Integration type of system framework</span>:<a href="#integration-<?php echo $integration ?>"><?php echo $integration ?></a></li>
@@ -20,6 +77,36 @@
             <li class="<?php echo $db ?>"><span>Check database connection <strong>[MySQL]</strong></span>:<a href="#db-<?php echo $db ?>"><?php echo ucfirst($db) ?> - connection: <em><?php echo $dbname ?></em></a></li>
             <li class="<?php echo $siteurl ?>"><span>Check site_url</span>:<a href="#siteurl-<?php echo $siteurl ?>"><?php echo ucfirst($siteurl) ?></a></li>
         </ol>
+        <div>
+            <h2>What the ...?</h2>
+            
+            <h3>PHP Version</h3>
+            <p><a href="phpcanvas.com">PHPCanvas</a> uses strict <a href="#">object-oriented programming</a> and some required functions were only made available later than PHP 4.</p>
+            
+            <h3>Integration type of system framework</h3>
+            <p><a name="integration-centralized"><strong>Centralized</strong></a> integration is where the framework, the folder labelled <em>phpcanvas</em>, is located on a different location outside the application. This makes the framework reusable by other <a href="phpcanvas.com">PHPCanvas</a> aapplications. Also, centralizing increases security and reliability to the framework when working with multiple applications.</p>
+            
+            <p><a name="integration-localized"><strong>Localized</strong></a> integration prioritizes the portability of an application. This ensures the application will work on a specific version of <a href="phpcanvas.com">PHPCanvas</a>. Because the framework is located inside the application, this makes the migration from one server to another a lot less tedious.</p>
+
+            <h3><a name="rewrite">Apache <em>mod_rewrite</em></a></h3>
+            <p><a href="phpcanvas.com">PHPCanvas</a> makes URLs more readable with the help of Apache's <em>mod_rewrite</em> which is set in Apache's configuration file. Some commercial server's disable the access and checking of the configuration file.</p>
+            <p>If <em>mod_rewrite</em> is disabled, moving around the application can be simulated by passing the controller, method and parameters as a query string.</p>
+            <pre>
+                example:
+                from: http://mysite.com/controller/method/param1/param2
+                to: http://mysite.com/?controller/method/param1/param2
+            </pre>
+            
+            <h3><a name="tempfolder">Temporary Folder</em></a></h3>
+            <p><a href="http://phpcanvas.com">PHPCanvas</a> uses a temporary folder where it stores logs, caches and any other temporary files. Check the <em>read/write permission</em> for this folder before running the application especially for servers running on Linux or Unix.</p>
+            
+            <h3><a name="fallback">Load fallback function</em></a></h3>
+            <p><a href="http://phpcanvas.com">PHPCanvas</a> detects if the server supports new but required functions like <a href="http://php.net/manual/en/function.json-encode.php">json_encode</a> and <a href="http://php.net/manual/en/function.json-decode.php">json_decode</a>. If not, it creates synonymous functions to replace them. It is still advised to run the framework in PHP not older than 5.3.</p>
+            <h3><a name="dbconnection">Database Connection</a></h3>
+            <p>This may not be required in initial setup or not at all. <a href="http://phpcanvas.com">PHPCanvas</a> Tries to connect using to MYSQL database using the first credential entry in <em>database.ini</em>. If you are going to use a database, it is advised to test it here first.</p>
+            <h3><a name="siteurl"><em>site_url</em> configuration in <em>config.ini</em></a></h3>
+            <p>This is an optional configuration. Setting up the <em>site_url</em> with your absolute site location eases the referrence to the site in development and file access in html using the <a href="#">base tag</a>.</p>
+        </div>
     </div>
 </body>
 </html>

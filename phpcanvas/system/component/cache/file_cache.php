@@ -22,6 +22,8 @@ class FileCache extends AbstractCache {
      */
     private $path = '';
     
+    private static $fo = null;
+    
     /**
      * Contains the timestamp when the cache will expire.
      * @access private
@@ -42,8 +44,8 @@ class FileCache extends AbstractCache {
             $this->path = $path . '/ns' . md5($nameSpace);
         }
 		
-        if (!is_dir($this->path)) {
-            mkdir($this->path, 0777, true);
+        if (!empty(self::$fo)) {
+            self::$fo = new File($this->path);
         }
     }
     
@@ -55,11 +57,7 @@ class FileCache extends AbstractCache {
      * @return boolean
      */
     private function write($file, $string) {
-        if (!file_exists($this->path)) {
-            $this->initialize($this->path);
-        }
-        
-        return file_put_contents($file, $string);
+        return self::$fo->file($file)->write($string);
     }
     
     /**
@@ -69,11 +67,7 @@ class FileCache extends AbstractCache {
      * @return string
      */
     private function read($file) {
-        if (!file_exists($file) || !is_readable($file)) {
-            return false;
-        }
-        
-        return file_get_contents($file);
+        return self::$fo->file($file)->readAll();
     }
     
     /**
@@ -83,7 +77,7 @@ class FileCache extends AbstractCache {
      * @return string
      */
     private function toFile($key) {
-        return $this->path . '/' . md5('cache' . $key . '.cch');
+        return md5('cache' . $key . '.cch');
     }
     
     /**
