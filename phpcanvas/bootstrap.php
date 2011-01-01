@@ -9,9 +9,9 @@
 $ms = array_sum(explode(' ', microtime())); // setting the start time.
 
 /**
- * Contains all the utilities function for the application.
+ * Contains all the support utilities function for the application.
  */
-require 'system/autoload.php';
+require 'system/support.php';
 /**
  * The Master class.
  * Contains all system-related functions like, class monitoring,
@@ -31,18 +31,20 @@ App::initialize('application/database.ini', 'database');
 // Corrects the configuration if the application is trying to overwrite the system configurations.
 App::initialize('system/config.ini');
 
+App::$includePath = explode(PATH_SEPARATOR, ini_get('include_path'));
+
 // Automatically includes the required file when a class is being instantiated
 spl_autoload_register(array('App', 'load'));
 ini_set('unserialize_callback_func', 'spl_autoload_call');
 
+File::defaultPath(App::conf('file.tmp'));
 App::$sysroot = $ini['system_root'];
 
 // For accurate date transactions.
 date_default_timezone_set(App::conf('timezone'));
 // Activates/Deactivates debug mode.
 App::debug();
-// Instantiates all objects needed by the Application class.
-App::startObjects();
+
 // Overwritting the error handler will the one in App Class.
 set_error_handler(array('App', 'errorHandler'));
 
@@ -64,7 +66,7 @@ unset($controller);
 // Loading the View module
 if (!empty($layout)) {
     // assumes that layout is an HTML format if it's not specified.
-    AbstractFormat::factory($layout, $viewData, App::conf('view.compress'));
+    AbstractFormat::factory($viewData, $layout, App::conf('view.compress'));
 }
 
 if ($scriptTime) {

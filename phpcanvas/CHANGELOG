@@ -1,4 +1,11 @@
-2010-10-2626262626262626262626262626262626262626262626262626 Version 0.3.1
+2010-10-26 Version 0.3.2
+    - Added: Image component.
+    - Added: Cookie class.
+    - Smarter auto-load. Halts when a class is not loaded.
+    - Auto-load now includes files in utilities. Files with no family.
+    - Streamlined App::file returns false in error instead of reporting.
+    
+2010-10-26 Version 0.3.1
     - Enhanced PHPDocumentation
     - OracleDatabase::execute; $opts default is OCI_COMMIT_ON_SUCCESS
     - Deprecated: AbstractDatabase::closeConnection; use inherited close()
