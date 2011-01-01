@@ -41,7 +41,7 @@ class FileCache extends AbstractCache {
         $this->expires = (int) date('Ymd', time() + $expires);
         
         if (!empty($nameSpace)) {
-            $this->path = $path . '/ns' . md5($nameSpace);
+            $this->path = $path . '/.cch' . md5($nameSpace);
         }
 		
         if (!empty(self::$fo)) {

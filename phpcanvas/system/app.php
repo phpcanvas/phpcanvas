@@ -4,7 +4,7 @@
  * Contains all system-related functions like, class monitoring,
  * program flow and standards maintenance.
  * @author Gian Carlo Val Ebao
- * @version 1.4.2
+ * @version 1.4.3
  * @package PHPCanvas
  */
 
@@ -13,7 +13,7 @@
  * Contains all system-related functions like, class monitoring,
  * program flow and standards maintenance.
  * @author Gian Carlo Val Ebao
- * @version 1.4.2
+ * @version 1.4.3
  * @package PHPCanvas
  */
 class App {
@@ -65,7 +65,7 @@ class App {
      * Contains all declared include path.
      * @access private
      */
-    private static $includePath = array();
+    public static $includePath = array();
     
     /**
      * Checks if the file/directory exists relative to the include_path.
@@ -76,7 +76,7 @@ class App {
     public static function fileExists($file) {
         $path = self::$includePath;
         
-        for ($i = 0, $count = $path; $i < $count; $i++) {
+        for ($i = 0, $count = count($path); $i < $count; $i++) {
             if (file_exists($path[$i] . '/' . $file)) {
                 return true;
             }
@@ -100,8 +100,19 @@ class App {
      */
     public static function load($className) {
         self::$classes[] = $className;
-        $file = App::toFileName($className);
-        include App::file($file, substr($file, strrpos($file, '_') + 1), true);
+        $fileName = App::toFileName($className);
+        $file = App::file($fileName, substr($fileName, strrpos($fileName, '_') + 1), true);
+        
+        if ($file) {
+            include $file;
+        } else {
+            $util = App::file($fileName, 'utility', true);
+            if ($util) {
+                include $util;
+            } else {
+                App::kill('Class \'' . $className . '\' cannot be loaded. File not found.');
+            }
+        }
     }
     
     public static function showLoaded() {
@@ -151,7 +162,6 @@ class App {
      * @return object
      */
     public static function startObjects() {
-        self::$includePath = explode(PATH_SEPARATOR, ini_get('include_path'));
         self::$log = new FileLog(self::$conf['file']['log'] . '/');
         self::$logFile = 'error_' . date('ymd');
     }
@@ -235,25 +245,23 @@ class App {
      * @static
      * @return string
      */
-    public static function file($name, $type, $isRequired = false) {
+    public static function file($name, $type) {
         $conf = self::$conf['file'];
         if (empty($conf)) {
             return $name;
         }
-		
+        
         if (false !== in_array($type, self::$conf['COMPONENTS']['item'])) {
             $path = $conf['component'] . '/' . $type;
         } elseif (!empty($conf[$type])) {
             $path = $conf[$type];
         } else {
-            return $name;
+            return false;
         }
-		$path = $path . '/' . $name . ('view' == $type || 'error' == $type ? '': '.php');
-		if (!$isRequired || self::fileExists($path)) {
-			return $path;
-		} else {
-			App::kill('file \'' . $path . '\' cannot be found.');
-		}
+        
+        $path = $path . '/' . $name . ('view' == $type || 'error' == $type ? '': '.php');
+        
+        return self::fileExists($path) ? $path: false;
     }
 
     /**

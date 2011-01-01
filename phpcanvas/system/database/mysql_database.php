@@ -45,7 +45,7 @@ class MysqlDatabase extends AbstractDatabase {
         $conn = new mysqli($host, $username, $password, $db);
         
         if (false === $conn || !empty($conn->connect_errno)) {
-            trigger_error("Cannot connect to database using ($index)", E_USER_WARNING);
+            trigger_error('Cannot connect to database using (' . $index . ')', E_USER_WARNING);
             return false;
         }
         

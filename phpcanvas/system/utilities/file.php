@@ -2,7 +2,7 @@
 /**
  * File Class.
  * @author Gian Carlo Val Ebao
- * @version 1.0.1
+ * @version 1.0.3
  * @package PHPCanvas
  * @subpackage Utilities
  */
@@ -10,7 +10,7 @@
 /**
  * File system helper
  * @author Gian Carlo Val Ebao
- * @version 1.0.1
+ * @version 1.0.3
  * @package PHPCanvas
  * @subpackage Utilities
  */
@@ -29,16 +29,37 @@ class File {
     private $path = '';
     
     /**
-     * Inserts the message in a new line if <b>TRUE</b>, else overwrites the file.
+     * Contains the default file system path.
      * @access private
      */
-
+    private static $defaultPath = null;
+    
+    /**
+     * Indicates if the new string will be appended to the file or not.
+     * @access private
+     */
+    private $isAppend = false;
+    
+    public static function defaultPath($path) {
+        if (empty(self::$defaultPath)) {
+            self::$defaultPath = $path;
+        }
+        
+        return self::$defaultPath;
+    }
+    
     /**
      * Initializes the properties of the class.
-     * @param string $path Folder where the files will be stored.
+     * @param string $path Folder where the files will be stored. a wildcard <temp> can be prepended
+            to set the folder inside the default path.
      * @return object
      */
-    public function __construct($path) {
+    public function __construct($path = '<temp>') {
+    
+        if(0 === strpos($path, '<temp>')) {
+            $path = self::$defaultPath . substr($path, 6);
+        }
+        
         $path .= ('/' == substr($path, -1) || '\\' == substr($path, -1)) ? '': '/';
         if (!file_exists($path)) {
             $paths = explode('/', str_replace('\\', '/', $path));
@@ -64,6 +85,36 @@ class File {
     }
 
     /**
+     * Returns a list of all files inside the folder.
+     * @return array
+     */
+    public function listFiles() {
+        $handle = opendir($this->path);
+        $ignore = array('.', '..', '.htaccess');
+        $files = array();
+        
+        while (false !== ($file = readdir($handle))) {
+            if (!in_array($file, $ignore)) {
+                $files[] = $file;
+            }
+        }
+        
+        closedir($handle);
+        
+        return $files;
+    }
+
+    /**
+     * Deletes the active file.
+     * @return boolean
+     */
+    public function delete() {
+        $path = $this->path . $this->file;
+        $this->file = null;
+        return unlink($path);
+    }
+    
+    /**
      * Indicates if the new message will be appended or replace the previous message. Chainable.
      * @param boolean $isAppend true if the message will be appended.
      * @return object
@@ -78,6 +129,7 @@ class File {
      * @return boolean
      */
     public function exists() {
+        //echo '<pre>', $this->path . $this->file, '</pre>';
         return file_exists($this->path . $this->file);
     }
 

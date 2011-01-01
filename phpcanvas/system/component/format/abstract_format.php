@@ -22,23 +22,19 @@ abstract class AbstractFormat {
      * @param array $data array of variable names with their associated values.
      * @param boolean $isCompressed indicates if the the output will be compressed.
      */
-    public static function factory($layout, $data, $isCompressed) {
+    public static function factory($data, $layout, $isCompressed) {
         $layout = !is_array($layout) ? array('html' => $layout): $layout;
         list($format, $file) = each($layout);
         $format = strtolower($format);
         $view = $format . 'Format';
         $view = new $view();
-        $file = empty($file) ? array(''): (!is_array($file) ? array($file): $file);
+        $files = empty($file) ? array(''): (!is_array($file) ? array($file): $file);
         
         $view->header();
-        for ($i = 0, $cnt = count($file); $i < $cnt; $i++) {
-            // check if the file is specified if in HTML format.
-            if ('html' === $format) {
-                $file[$i] = !empty($file[$i]) ? App::file($file[$i],'view'): '';
-            }
-            
+        
+        for ($i = 0, $cnt = count($files); $i < $cnt; $i++) {
             // pumping in the data to the view module.
-            echo $view->build($data, $file[$i], $isCompressed);
+            echo $view->build($data, $files[$i], $isCompressed);
         }
     }
     

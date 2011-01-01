@@ -3,7 +3,7 @@
  * Renders the output in HTML format.
  * Other file formats can also be use as long as it has a (.htm) extension and is in the View folder.
  * @author Gian Carlo Val Ebao
- * @version 1.0.2
+ * @version 1.0.3
  * @package PHPCanvas
  * @subpackage Format
  */
@@ -12,7 +12,7 @@
  * Renders the output in HTML format.
  * Other file formats can also be use as long as it has a (.htm) extension and is in the View folder.
  * @author Gian Carlo Val Ebao
- * @version 1.0.2
+ * @version 1.0.3
  * @package PHPCanvas
  * @subpackage Format
  */
@@ -23,6 +23,7 @@ class HtmlFormat extends AbstractFormat {
      */
     public function header() {
         header('Content-type: text/html');
+        //header('Content-type: application/xhtml+xml');
         header('Connection: Keep-Alive');
         //header('Cache-Control: public, max-age=31536000');
         //header('Last-Modified: ' . date('r'));
@@ -37,15 +38,16 @@ class HtmlFormat extends AbstractFormat {
      * @param boolean $iscompressed_x <b>Optional</b>. Compresses the output if <b>TRUE</b>.
      */
     public function build($applicationdata_x, $applicationfile_x, $iscompressed_x = true) {
+    
         extract($applicationdata_x, EXTR_SKIP);
         unset($applicationdata_x);
-        
         ob_start();
-            if (!file_exists($applicationfile_x . '.htm')) {
-                trigger_error("Cannot locate $applicationfile_x.htm in 'VIEW'.", E_USER_ERROR);
+            if (empty($applicationfile_x) || !App::fileExists(App::file($applicationfile_x . '.htm', 'view'))) {
+                trigger_error('Cannot locate ' . $applicationfile_x . '.htm in \'VIEW\'.', E_USER_ERROR);
                 return false;
             }
-            include $applicationfile_x . '.htm';
+            
+            include App::file($applicationfile_x  . '.htm', 'view');
             $contents_x = ob_get_contents();
         ob_end_clean();
         
